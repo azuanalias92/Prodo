@@ -9,26 +9,35 @@ import {
   Image,
   Alert
 } from 'react-native';
-const styles = require('./LoginStyles');
+const styles = require('./SignupStyles');
 
-export default class LoginView extends Component {
+export default class SignupView extends Component {
 
   constructor(props) {
     super(props);
     state = {
-      email   : '',
-      password: '',
+      username    : '',
+      email       : '',
+      password    : '',
     }
   }
 
   onClickListener = (viewId) => {
-    //Alert.alert("Alert", "Button pressed "+viewId);
-    this.props.navigation.navigate('Main');
+    Alert.alert("Alert", "Button pressed "+viewId);
   }
 
   render() {
     return (
       <View style={styles.container}>
+        <View style={styles.inputContainer}>
+          <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/message/ultraviolet/50/3498db'}}/>
+          <TextInput style={styles.inputs}
+              placeholder="Username"
+              keyboardType="default"
+              underlineColorAndroid='transparent'
+              onChangeText={(username) => this.setState({username})}/>
+        </View>
+
         <View style={styles.inputContainer}>
           <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/message/ultraviolet/50/3498db'}}/>
           <TextInput style={styles.inputs}
@@ -48,11 +57,7 @@ export default class LoginView extends Component {
         </View>
 
         <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={() => this.onClickListener('login')}>
-          <Text style={styles.loginText}>Login</Text>
-        </TouchableHighlight>
-
-        <TouchableHighlight style={styles.buttonContainer} onPress={() => this.props.navigation.navigate('Signup')}>
-            <Text>Register</Text>
+          <Text style={styles.loginText}>Register</Text>
         </TouchableHighlight>
       </View>
     );
