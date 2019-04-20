@@ -8,42 +8,44 @@
 
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
+import {createStackNavigator, createBottomTabNavigator, createSwitchNavigator,createAppContainer} from 'react-navigation';
+import Login from './components/Login/Login';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
 
-type Props = {};
-export default class App extends Component<Props> {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-      </View>
-    );
+
+/*const AppNavigator = createStackNavigator({
+  {
+    Product: { screen: Product , navigationOptions: ({navigation}) => ({ header: null }),},
+    AddProd: { screen: AddProd , navigationOptions: ({navigation}) => ({ header: null }),},
+    ViewProd: { screen: ViewProd , navigationOptions: ({navigation}) => ({ header: null }),},
+    UpdateProd: { screen: UpdateProd , navigationOptions: ({navigation}) => ({ header: null }),},
+  },
+  {
+    initialRouteName: 'Product',
   }
-}
+});*/
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+
+const AuthNavigator = createStackNavigator(
+  {
+    Login: { screen: Login , navigationOptions: ({navigation}) => ({ header: null }),},
+    //Signup: { screen: Signup , navigationOptions: ({navigation}) => ({ header: null }),},
+    //ForgotPassword: { screen: ForgotPassword , navigationOptions: ({navigation}) => ({ header: null }),},
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  {
+    initialRouteName: 'Login',
+  }
+);
+
+export default createAppContainer(createSwitchNavigator(
+  {
+    //Initialise : { screen: Initialise , navigationOptions: ({navigation}) => ({ header: null }),},
+    //App : AppNavigator,
+    Auth : AuthNavigator,
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
+  {
+    initialRouteName: 'Auth',
+  }
+));
+
+
