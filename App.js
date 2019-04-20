@@ -59,7 +59,7 @@ export default createAppContainer(createSwitchNavigator(
     Auth : AuthNavigator,
   },
   {
-    initialRouteName: 'Auth',
+    initialRouteName: 'App',
   }
 ));
 
